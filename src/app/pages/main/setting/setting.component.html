@@ -1,0 +1,72 @@
+<div nz-row class="container">
+  <div nz-col [nzSpan]="4"></div>
+  <div nz-col [nzSpan]="16" class="container-form">
+    <div class="tool-btns">
+      <button nz-button nzType="default" (click)="exportConfig()">
+        <i nz-icon nzType="download"></i><span>导出</span>
+      </button>
+      <nz-divider nzType="vertical"></nz-divider>
+      <nz-upload [nzBeforeUpload]="beforeUpload" nzAccept=".json">
+        <button nz-button><i nz-icon nzType="upload"></i><span>导入</span></button>
+      </nz-upload>
+    </div>
+    <div class="title">
+      请前往七牛云控制台，查找并填写相应信息。
+    </div>
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="accessKey"> AccessKey</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入AccessKey!">
+          <input nz-input formControlName="accessKey" id="accessKey" autocomplete="off"
+                 placeholder="个人中心-密钥管理-AccessKey"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="secretKey">SecretKey</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入SecretKey!">
+          <input nz-input formControlName="secretKey" id="secretKey" autocomplete="off"
+                 placeholder="个人中心-密钥管理-SecretKey"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="bucket">bucket</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入bucket!">
+          <input nz-input formControlName="bucket" id="bucket" autocomplete="off"
+                 placeholder="对象存储-空间管理-空间名称"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="folder">folder</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input formControlName="folder" id="folder" autocomplete="off"
+                 placeholder="指定上传的子目录名称"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="domain">域名</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入域名!">
+          <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+            <input nz-input formControlName="domain" id="domain" autocomplete="off"
+                   placeholder="请输入域名"/>
+            <ng-template #addOnBeforeTemplate>
+              <nz-select style="width: 90px;" formControlName="protocol">
+                <nz-option [nzLabel]="'http://'" [nzValue]="'http://'"></nz-option>
+                <nz-option [nzLabel]="'https://'" [nzValue]="'https://'"></nz-option>
+              </nz-select>
+            </ng-template>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item class="buttons">
+        <nz-form-control [nzSpan]="24">
+          <button nz-button type="button" nzType="default" (click)="changeLockStatus(!locked)">
+            <i nz-icon [nzType]="locked?'lock':'unlock'"></i><span>{{locked ? '解锁' : '锁定'}}</span>
+          </button>
+          <nz-divider nzType="vertical"></nz-divider>
+          <button nz-button type="submit" nzType="primary" [disabled]="locked">保存设置</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>
+  <div nz-col [nzSpan]="4"></div>
+</div>

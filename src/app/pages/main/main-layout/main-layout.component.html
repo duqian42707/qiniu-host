@@ -1,0 +1,41 @@
+<div style="height: 100%">
+  <nz-layout class="dq-layout" [@contentPaddingAnimation]="isCollapsed?'none':'block'">
+    <nz-sider class="dq-sidebar"
+              nzCollapsible
+              nzBreakpoint="md"
+              [nzWidth]="siderCollapseWidth"
+              [(nzCollapsed)]="isCollapsed">
+      <div class="sidebar-logo">
+        <a routerLink="/">
+          <img src="assets/img/logo.svg" alt="logo">
+          <h1>七牛云图床助手</h1>
+        </a>
+      </div>
+      <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+        <li nz-submenu nzOpen nzTitle="主菜单" nzIcon="dashboard">
+          <ul>
+            <li nz-menu-item nzMatchRouter>
+              <a routerLink="/upload">上传</a>
+            </li>
+<!--            <li nz-menu-item nzMatchRouter>-->
+<!--              <a routerLink="/view">浏览</a>-->
+<!--            </li>-->
+            <li nz-menu-item nzMatchRouter>
+              <a routerLink="/setting">设置</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nz-sider>
+    <nz-layout class="dq-right-layout">
+      <nz-header class="dq-header">
+        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+            <i nz-icon class="trigger" [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
+        </span>
+      </nz-header>
+      <nz-content class="dq-content">
+        <router-outlet></router-outlet>
+      </nz-content>
+    </nz-layout>
+  </nz-layout>
+</div>
